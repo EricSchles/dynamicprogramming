@@ -50,3 +50,30 @@ class Tree:
         self.root.left = None
         self.root.right = None
         self.root = Node(random.randint(0,1000))
+
+class solver:
+    #root is the root of the tree being passed in
+    def __init__(self,root):
+        self.array = []
+        self.root = root
+    
+    def minpath(self):
+        if self.root == None:
+            print "Please provide a non-empty tree"
+        else:
+            return self._minpath(self.root.item,self.root)
+    
+    def _minpath(self,parent,curr):
+        curr.item += parent
+        #assumes tree is complete, change this to "or" if incomplete tree
+        if curr.left == None and curr.right == None:
+            self.array.append(curr.item)
+        else:
+            self._minpath(curr.item,curr.left)
+            self._minpath(curr.item,curr.right)
+
+    def mincost(self):
+        self.minpath()
+        return min(self.array)
+
+    
